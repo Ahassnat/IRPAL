@@ -1,0 +1,80 @@
+﻿@model NewsCMD.Models.Admin
+
+@{
+    Layout = "~/Areas/CMD/Views/Shared/_iFrameLayout.cshtml";
+    ViewBag.Title = "صلاحيات المستخدم -  " + Model.FullName;
+    var db = ViewBag.db as NewsCMD.Models.FBaselNewsWebSiteEntities;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(modle=>modle.Id)
+
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class=" col-md-12">
+                <ul class="list-unstyled  permission">
+                    @{
+                        var Links = db.Links.Where(x => x.ParentId == 0).ToList();
+                        foreach(var link in Links)
+                        {   //السطر هاد معناه هل الادمن يملك صلاحية ولا لا 
+                            var haveAdminThisLink = Model.Links.Count(x => x.Id == link.Id) > 0;
+                            <li>
+                                <label>
+                                    <input name="linkId" @(haveAdminThisLink?"checked":"") type="checkbox" value="@link.Id" />
+                                    <b>@link.Title</b>
+                                </label>
+                               <ul class="list-unstyled">
+                                   @{ 
+                                       var sublinks = db.Links.Where(x => x.ParentId == link.Id).ToList();
+                                       foreach(var sublink in sublinks)
+                                       {
+                                           var haveAdminThisSubLink = Model.Links.Count(x => x.Id == sublink.Id) > 0;
+                                           <li>
+                                               <label>
+                                                   <input name="linkId" @(haveAdminThisSubLink?"checked":"")  type="checkbox" value="@sublink.Id"/>
+                                                   @sublink.Title
+                                               </label>
+                                           </li>
+                                       }
+                                   }
+                               </ul>
+                            </li>
+
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class=" col-md-12">
+                <input type="submit" value="حفظ الصلاحيات " class="btn btn-primary"  />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".permission :checkbox").click(function() {
+                $(this).parent().next().find(":checkbox").prop("checked", $(this).prop("checked"));
+
+                $(this).parents("ul").each(function () {
+                    $(this).prev().find(":checkbox").prop("checked", $(this).find(":checked").size() > 0);
+                });
+            });
+        });
+    </script>
+    
+    }

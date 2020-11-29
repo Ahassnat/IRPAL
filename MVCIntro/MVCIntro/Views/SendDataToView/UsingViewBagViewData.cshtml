@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Using ViewBag and ViewData";
+
+    //var bmw = ViewBag.BMW as MVCIntro.Controllers.Car;
+    //var bmw = (MVCIntro.Controllers.Car)ViewBag.BMW;
+    //هاد الكود في حال كان عنا عدد خصائص كبير في الكلاس ومش قادين نحفظهم بنستدعي هاد الكود  عشان يسير يطلع اسماء الخصائص تلقائي
+    var x = ViewBag.BMW as MVCIntro.Controllers.SendDataToViewController.Car;
+    var mar = ViewBag.Mar as MVCIntro.Controllers.SendDataToViewController.Car;
+}
+
+<h2>Using ViewBag and ViewData</h2>
+<hr />
+<h3>ViewBag</h3>
+<p><b>View Data and View Bag is : </b>@ViewBag.Title</p>
+<p><b>Name : </b>@ViewBag.Name</p>
+<p><b>Age: </b>@ViewBag.Age</p>
+
+<p><b>view bag to Car Models Name :</b>@ViewBag.BMW.Name</p>
+<p><b>View bag to car model</b>@ViewBag.BMW.Model</p>
+<p><b>view bag to car year production </b>@ViewBag.BMW.Year</p>
+
+<h1><b>car name:  </b>@x.Name</h1>
+<h1><b>car modele:  </b>@x.Model</h1>
+<h1><b>car year:  </b>@x.Year</h1>
+<h3>x2.Name ::  <b>@mar.Name</b></h3>
+
+<h2>MNW Name :  <b>@x.Name</b></h2>
+<h2>BMW Year Production <b>@x.Year</b></h2>
+
+

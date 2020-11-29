@@ -1,0 +1,88 @@
+﻿@model NewsCMD.Models.Slider
+
+@{
+    ViewBag.Title = "التعديل علي الشرائح";
+}
+
+
+
+<form enctype="multipart/form-data"></form>
+@using (Html.BeginForm(null,null,FormMethod.Post,new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, "عنوان الشريحة", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Image, "الصورة", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="img" />
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <br />
+                <img src="/Content/Images/Thumbe/@Model.Image" class="img-thumbnail img-rounded" />
+            }
+
+            @*@Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.URL, "رابط ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10 col-md-offset-2">
+            <label class="checkbox">
+                @Html.EditorFor(model => model.Active)
+                فعال
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10 col-md-offset-2">
+            <label class="checkbox">
+                @Html.EditorFor(model => model.NewWindow)
+                نافذه جديدة
+            </label>
+        </div>
+    </div>
+
+   
+
+   
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="حفظ" class="btn btn-primary" />
+            @Html.ActionLink("الغاء الامر", "Index",null , new { @class= "btn btn-default" })
+        </div>
+    </div>
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

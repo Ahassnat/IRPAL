@@ -1,0 +1,108 @@
+﻿@model IEnumerable<NewsCMD.Models.Admin>
+
+@{
+    ViewBag.Title = "المستخدمين";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" class="form-inline">
+            <input autofocus value="@ViewBag.q" name="q" class="form-control" type="search" placeholder="بحث عن " aria-label="Search">
+            <button class="btn btn-primary " type="submit">انطلق!</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-success pull-right" href="/CMD/Admin/Add"><i class="fa fa-plus"></i> اضافة مستخدم </a>
+    </div>
+</div>
+<hr />
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                الاسم الكامل
+                @*@Html.DisplayNameFor(model => model.FullName)*@
+            </th>
+            <th>
+                البريد الاكتروني
+                @* @Html.DisplayNameFor(model => model.Email)*@
+            </th>
+            <th>
+                رقم الهاتف
+                @*@Html.DisplayNameFor(model => model.Mobile)*@
+            </th>
+            <th>
+                فعال
+                @*@Html.DisplayNameFor(model => model.Active)*@
+            </th>
+
+            <th>
+                تاريخ الاضافة
+                @*@Html.DisplayNameFor(model => model.InsertedAt)*@
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Active)*@
+                    <input class="chActive" value="@item.Id" type="checkbox" @(item.Active ? "checked" : "") />
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.InsertedAt)
+                </td>
+
+                <td>
+
+                    <a title="صلاحيات المستخدم - @item.FullName" class="btn btn-inverse  iFrame btn-xs" href="/CMD/Admin/Permission/@item.Id"><i class="glyphicon glyphicon-lock "></i></a>
+
+                    <a title="تعديل " class="btn btn-info btn-xs" href="/CMD/Admin/Edit/@item.Id"><i class="glyphicon glyphicon-edit "></i></a>
+
+
+                    <a class="btn Confirm btn-xs btn-danger" href="/CMD/Admin/Delete/@item.Id"><i class="glyphicon glyphicon-remove "></i></a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        @Resources.Labels.NoItems
+    </div>
+}
+
+@Html.Partial("_paging2")
+
+@section scripts{
+    <script>
+    $(function () {
+        $(".chActive").click(function () {
+            var id = $(this).val();
+            $.get("/CMD/Admin/Active/" + id);
+        });
+    });
+    </script>
+
+
+}
+
+
+

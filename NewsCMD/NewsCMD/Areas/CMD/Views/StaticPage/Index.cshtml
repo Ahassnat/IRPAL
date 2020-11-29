@@ -1,0 +1,77 @@
+﻿@model IEnumerable<NewsCMD.Models.StaticPage>
+
+@{
+    ViewBag.Title = "الصفحات الثابتة";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" class="form-inline">
+            <input autofocus value="@ViewBag.q" name="q" class="form-control" type="search" placeholder="بحث عن " aria-label="Search">
+            <button class="btn btn-primary " type="submit">انطلق!</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-success pull-right" href="/CMD/StaticPage/Add"><i class="fa fa-plus"></i> اضافة صفحة جديدة </a>
+    </div>
+</div>
+<hr />
+@if (Model.Count() > 0)
+{
+<table class="table">
+    <tr>
+        <th>
+            العنوان
+        </th>
+        <th>
+            مختصر الرابط
+        </th>
+
+        <th>
+            النشر
+        </th>
+
+        <th>
+            وقت النشر
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Published)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.InsertedAt)
+            </td>
+
+            <td>
+                <a class="btn btn-info btn-sm" href="/CMD/StaticPage/Edit/@item.Id"><i class="glyphicon glyphicon-edit"></i></a>
+                <a class="btn Confirm btn-danger btn-sm" href="/CMD/StaticPage/Delete/@item.Id"><i class="glyphicon glyphicon-remove"></i></a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+}
+else
+{
+    <div  class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        @Resources.Labels.NoItems
+    </div>
+}
+
+@Html.Partial("_paging2")

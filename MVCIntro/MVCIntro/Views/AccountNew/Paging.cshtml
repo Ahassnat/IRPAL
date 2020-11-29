@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MVCIntro.Models.Account>
+
+@{
+    ViewBag.Title = "Simple Pagination";
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <div>
+                    #Region Delete With JS
+                    <a class="btn btn-danger" href="/AccountNew/Delete/@item.Id"><i class="glyphicon glyphicon-trash btn-xs"></i></a>
+                    <a onclick="return confirm('Are You Sure ')" class="btn btn-danger" href="/AccountNew/DeleteLink/@item.Id"><i class="glyphicon glyphicon-remove btn-xs"></i></a>
+                    <a class="btn Confirm btn-xs btn-warning" href="/AccountNew/DeleteLink/@item.Id"><i class="glyphicon glyphicon-remove "></i></a>
+                    #End_Region
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+#Pagination
+<!--هاد لكود بيرسم البيجنيش بحركات زي قبل وبعد وبنلاقيه في صفحتو الخاصة وهاد اللي احنا استعملناه-->
+@Html.Partial("_paging")
+<!--الكود اللي تحت بيرسم البيجنيشن بجون زر قبل وبعد -->
+<!--Receve Data From Controler AccountNew By ViewBag to Rended Pagination -->
+@*@{
+        int PageID = (int)ViewBag.PageID;
+        int PageCount = (int)ViewBag.PageCount;
+        string BaseURL = ViewBag.BaseURL;
+
+        if (PageCount > 1)
+        {
+            <ul class="pagination pagination-sm">
+                @for(int i=1; i < PageCount; i++)
+                {
+                    if (i == PageID)
+                    {
+                        <li class="active"><span>@i</span></li>
+                    }
+                    else
+                    {
+                        <li><a href="@BaseURL/@i">@i</a></li>
+                    }
+                }
+            </ul>
+        }
+    }*@
+<!--End of Paging Render-->
+#end Pagination
+

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Using TempData";
+}
+
+<h2>Using  TempData</h2>
+
+<p>the MSg from TempData Paaage:::  <b>@TempData["massage"]</b></p>
+<p>the Number From TempData Page:::  <b>@ViewBag.x</b></p>
+<h1>From XAction</h1>
+<p>The MSG from XAction::: <b>@TempData["x"]</b></p>
+<p>the Number From XAction::: <b>@ViewBag.y</b></p>
+
+<p>call the Massage Frome Action By ViewBag.z:::   <b>@ViewBag.z</b></p>
+
+<a target="_blank" class="btn btn-warning" href="/Bussines/Home/XAction">Go to X Action</a>
+@*<a target="_blank" class="btn btn-danger" href="/Bussines/Home/UsingTempData">Go to X Action</a>*@
+

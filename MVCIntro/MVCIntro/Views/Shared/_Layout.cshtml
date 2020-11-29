@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("css", false)
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Vision", "Vision", "Home")</li>
+
+                    <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           area-haspopup="true" aria-expanded="false">Send Data to View<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/SendDataToView/UsingViewBagViewData">Using viewData & ViewBag</a></li>
+                            <li><a href="/SendDataToView/UsingTempData">Using Temp Data</a></li>
+                            <li><a href="/SendDataToView/UsingModel">Using Modle</a></li>
+                        </ul>
+                    </li>
+                    @* <li>@Html.ActionLink("C#", "CSIntro", "Home")</li>*@
+                    <li><a href="/Home/CSIntro">CS Intro</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           area-haspopup="true" aria-expanded="false">Upload File<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Forms/UploadFile">Upload File</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           area-haspopup="true" aria-expanded="false">Accout CRUD<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/AccountNew/index">Index</a></li>
+                            <li><a href="/AccountNew/Create">Create</a></li>
+                            <li><a href="/AccountNew/Paging">Simple Pagination</a></li>
+                            <li><a href="/AccountNew/Search">Simple Search</a></li>
+                            <li><a href="/AccountNew/SearchAdvanced">Advanced Search</a></li>
+                            <li><a href="/AccountNew/SearchPaging">Search Paging</a></li>
+                            <li><a href="/AccountNew/SearchAdvancedPaging">Search Advanced Paging</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           area-haspopup="true" aria-expanded="false">Ajax Examples<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/AjaxExample/LoadExample">Load Example</a></li>
+                            <li><a href="/AjaxExample/PostExample">Post Example</a></li>
+                            <li><a href="/AjaxExample/GetExample">Get Example</a></li>
+                            <li><a href="/AjaxExample/AjaxExample">Ajax Example</a></li>
+                        
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+        <h1>@ViewBag.Title</h1>
+        @*هيستدعي صفحة جزئية تحتوي علي كود لشغلة معينة بس بدل ما نكتب هان بنوخذ بس اسم الصفحة *@
+        @Html.Partial("_msg")
+        @* الصفحةة اللي طبقت ال Layout هتيجي محتوياتها هان *@
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Html.Partial("_deleteWithJS")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- هاد السكريبت لتشغيل المودل اللي فوق تاع ال
+        Modal Dialog
+        بنستخدم الكود اللي
+        Html.Partial("_deleteWithJS")
+        Partial View  ==> _deleteWithJS     -->
+    <script>
+        $(function () {
+            //$("#Confirm").modal("show"); => هاد الفنكشن بس لاضهار صندوق الحوار بس
+            $(document).on("click", ".Confirm", function () {  //=>متي ما كان الزر موجود اعمل الفنكشن التالية
+                $("#Confirm").modal("show");
+                $("#Confirm .btn-danger").attr("href", $(this).attr("href"));
+                return false; //  => هيك انا وقف الزر اللي هبعتلو ال Confirm
+
+            });
+        })
+    </script>
+
+    @* لعدم اجبار صفحة الابن واللي هي الاندكس علي كتابة جافا سكريبت له مطلق الحرية  *@
+    @* وتعتبر الرندر ك اعلان للابن اللي هوا الاندكس ومش مجبر انو يستخدمو لكن لوحطيتها ترو بدل فولص هيصير مجبر انه يستخدم السكربت داخل الاندكس  *@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

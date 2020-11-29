@@ -1,0 +1,92 @@
+﻿@model IEnumerable<MVCIntro.Models.Account>
+
+@{
+    ViewBag.Title = "Account List ";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <a class="btn btn-primary" href="/Account/Create">Create New <i class="glyphicon glyphicon-plus"></i></a>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                   @*DisplayNameFor
+                      هاد الدالة بتشوف اذا في
+                      Display
+                      محطوط في الكلاس تاعها فبتعرض ايش موجود في الدسبلاي
+                     وهاتلي قيمتها ان وجدت وان لم توجد هات اسمو العمود زي ماهو   *@
+
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                Email
+                @*@Html.DisplayNameFor(model => model.Email)*@
+            </th>
+            <th>
+                Gender
+                @*@Html.DisplayNameFor(model => model.Gender)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                Birth Date
+               @* @Html.DisplayNameFor(model => model.DOB)*@
+            </th>
+            <th>
+                Country Name 
+                @*@Html.DisplayNameFor(model => model.Country.Name)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+  
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @* DisplayFor
+                        روحلي علي عمود الاسم وشوفيلي الاسم وتطلعي الفورمات تاعو واطبعوه*@
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @* @item.Gender
+                       بنستخدم هاد الدالة كبديل عن دالة  
+                         DisplayFor
+                        لكن بتسير فيها مشكلة انها بترفض الحقول اللي بتكون قيمتها 
+                        NULL*@
+                    @item.Gender
+                    @*@Html.DisplayFor(modelItem => item.Gender)*@
+                </td>
+                <td>
+                    @*@item.Active*@
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country.Name)
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/Account/Edit/@item.Id"><i class="glyphicon glyphicon-edit"></i>Edit</a>
+                    @* @Html.ActionLink("Edit", "Edit", new { id = item.Id }) *@|
+                    <a class="btn btn-info" href="/Account/Details/@item.Id"><i class="glyphicon glyphicon-comment"></i>Details</a>
+                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) *@|
+                    <a class="btn btn-danger" href="/Account/Delete/@item.Id"><i class="glyphicon glyphicon-remove btn-xs"></i></a>
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>

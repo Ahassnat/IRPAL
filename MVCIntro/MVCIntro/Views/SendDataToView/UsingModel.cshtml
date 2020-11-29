@@ -1,0 +1,16 @@
+﻿
+@* طريقة لعمل قراءة تلقائية للمودل  *@
+@model MVCIntro.Controllers.SendDataToViewController.Car
+@{
+    ViewBag.Title = "UsingModel";
+   var x = Model as MVCIntro.Controllers.SendDataToViewController.Car;
+}
+
+<h2>UsingModel</h2>
+<p>Car Name::   <b>@Model.Name</b></p>
+<p>Car Modle::   <b>@Model.Model</b></p>
+<p>Car year::  <b>@Model.Year</b></p>
+<h1>@Model.Name</h1>
+<h1>@x.Year</h1>
+
+

@@ -1,0 +1,73 @@
+﻿@model MVCIntro.Models.Account
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Account</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Full Name
+            @*@Html.DisplayNameFor(model => model.FullName)*@
+        </dt>
+
+        <dd>
+            @Model.FullName
+            @*@Html.DisplayFor(model => model.FullName)*@
+        </dd>
+
+        <dt>
+            
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            <a href="mailto:@Model.Email">@Model.Email</a>
+            @*@Html.DisplayFor(model => model.Email)*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            Coubtry Name
+            @Html.DisplayNameFor(model => model.Country.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a class="btn btn-primary" href="/Account/Edit/@Model.Id">Edit<i class="glyphicon glyphicon-comment"></i></a>
+   @* @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    <a class="btn btn-success" href="/Account/Index">Back to List</a>
+    @*@Html.ActionLink("Back to List", "Index")*@
+</p>

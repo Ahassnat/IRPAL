@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "UsingTempData";
+}
+
+<h2>UsingTempData</h2>
+
+<p>Massage From Temp Data:: <b>@TempData["massge"]</b></p>
+<p>Massage From Action ::    <b>@TempData["FromSomeAction"]</b></p>
+<p>Massage From Action XYZ:: <b>@ViewBag.xyz</b></p>
+
+<p>the massage from Some Action show in UsingTempData Page:: <h1>@ViewBag.msg</h1></p>
+<hr />
+<a target="_blank" class="btn btn-danger" href="/SendDataToView/SomeAction">Go to some Action </a>
+

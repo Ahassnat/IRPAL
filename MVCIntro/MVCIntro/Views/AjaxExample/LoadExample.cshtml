@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Load Example";
+}
+
+<p>
+    .load(url [,data] [,complete])
+    <pre>
+load(url [,data] [,complete])load(url [,data] [,complete])load(url [,data] [,complete])
+load(url [,data] [,complete])load(url [,data] [,complete])
+load(url [,data] [,complete])load(url [,data] [,complete])load(url [,data] [,complete])
+load(url [,data] [,complete])load(url [,data] [,complete])
+load(url [,data] [,complete])load(url [,data] [,complete])
+load(url [,data] [,complete])
+load(url [,data] [,complete])load(url [,data] [,complete])
+load(url [,data] [,complete])
+
+</pre>
+</p>
+<button id="btn1" class="btn btn-default">
+    load 1
+</button>
+<button id="btn2" class="btn btn-primary">
+    load 2
+</button>
+<button id="btn3" class="btn btn-warning">
+    load 3 <span></span>
+    
+</button>
+<hr />
+<div id="divLoad" class="jumbotron">
+
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $("#btn1").click(function () {
+                $("#divLoad").load("/AjaxExample/Page1/ .x");
+            });
+            $("#btn2").click(function () {
+                $("#divLoad").load("/AjaxExample/PostEx", { age: 9, gender: "M" });
+            });
+
+            $("#btn3").click(function () {
+                $("#btn3 span").text("Loading...")
+                $("#divLoad").load("/AjaxExample/PostEx", { age: 9, gender: "M" },
+                    function () {
+                        $("#btn3 span").text("")
+                    });
+
+            });
+        });
+    </script>
+    }

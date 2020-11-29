@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "CSIntro";
+}
+
+<h2>CSIntro</h2>
+<h3>Value Type</h3>
+@{
+    int a = 12;
+    int b = 15;
+    b += 5;
+    string n = "NAME-BUSSINESS";
+}
+<p>A=<b>@a</b>, B=<b>@b</b>, Name =<b>@n</b></p>
+<hr />
+<h3>Ref Type</h3>
+@{
+    var Ahmed = new MVCIntro.Areas.Bussines.Controllers.HomeController.Student();
+    Ahmed.StudentName = "Ahmed Hammed";
+    Ahmed.ClassNumber = 3;
+}
+
+<p>Student Name :::<b>@Ahmed.StudentName</b></p>
+<p>Student Class :::<b>@Ahmed.ClassNumber</b></p>
+<hr />
+
+
+<h3>ARRAYs</h3>
+@{
+    string[] names = new string[] { "Ahmed", "Mohammed", "Salmay", "KHload" };
+    for (int i = 0; i < names.Length; i++)
+    {
+        <ul>
+            <li>@names[i]</li>
+        </ul>
+    }
+    <hr />
+
+    foreach (var name in names)
+    {
+        <ol>
+            <li>name</li>
+        </ol>
+    }
+    <hr />
+    int[] ages = new int[] { 25, 31, 19 };
+    <ol>
+        @foreach (var age in ages)
+        {
+            <li>
+                @age
+            </li>
+        }
+    </ol>
+
+
+}
+
+<h3>2D ARRAYs</h3>
+@{
+    int[,] ms = new int[4, 5];
+    for (var m = 0; m < 4; m++)
+    {
+        for (var s = 0; s < 5; s++)
+        {
+            ms[m, s] = m + s * 15;
+            @ms[m, s]
+            <span>&nbsp;</span>
+
+        }
+        <br />
+    }
+    <hr />
+
+
+}

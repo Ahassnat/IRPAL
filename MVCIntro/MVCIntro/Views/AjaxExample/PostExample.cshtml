@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Post Example";
+}
+
+
+<button id="btn1" class="btn btn-default">
+    post # 1
+</button>
+
+<button id="btn2" class="btn btn-primary">
+    post XML <span></span>
+</button>
+
+<button id="btn3" class="btn btn-danger">
+    post JSON <span></span>
+</button>
+<hr />
+<div id="divLoad" class="jumbotron">
+
+</div>
+
+@section scripts{
+    <script>
+
+        $(function () {
+            $("#btn1").click(function () {
+                $.post("/AjaxExample/PostEx",
+                    { age: 55, gender: "Female" },
+                    function (data) {
+                        $("#divLoad").html(data);
+                    });
+            });
+
+            $("#btn2").click(function () {
+                $("#btn2 span").text("Loading...");
+                $.post("/AjaxExample/GetXML",
+                    function (xml) {
+                        $("#divLoad").html("");
+                        $(xml).find("person").each(function () {
+                            $("#divLoad").append("Name: <b>" +
+                                $(this).find("name").text() + "</b>");
+                            $("#divLoad").append("<br>Age: <b>" +
+                                $(this).find("age").text() + "</b>");
+                            $("#divLoad").append("<br>Edu: <b>" +
+                                $(this).find("edu").text() + "</b><hr>");
+                        });
+                        $("#btn2 span").text("");
+                    }, "XML");
+            });
+
+            $("#btn3").click(function () {
+                $.post("/AjaxExample/GetJson",
+                    function (json) {
+                        $("#divLoad").html("");
+                        $(json).each(function () {
+                            $("#divLoad").append("</br>Name: <b>" +
+                                this.Name + "</br>");
+                            $("#divLoad").append("</br>Age: <b>" +
+                                this.Age + "</br>");
+                            $("#divLoad").append("</br>Edu: <b>" +
+                                this.Edu + "</br><hr>");
+                        });
+                    });
+            });
+        });
+    </script>
+}

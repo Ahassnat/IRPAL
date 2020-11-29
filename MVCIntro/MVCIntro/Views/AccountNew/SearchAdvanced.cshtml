@@ -1,0 +1,97 @@
+﻿
+@model IEnumerable<MVCIntro.Models.Account>
+
+@{
+    ViewBag.Title = "Advaced Search";
+}
+
+<form method="get" class="row">
+    <div class="col-sm-4">
+        <input name="q" value="@ViewBag.q" type="text" class="form-control" placeholder="Search for..." />
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control" name="gender">
+            <option value="">All Gender</option>
+            <option @(ViewBag.gender == "M" ? "Selected" : "") value="M">Male</option> <!-- if-else Lambda Exceprtion-->
+            <option @(ViewBag.gender=="F" ?"Selected":"") value="F">Female</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control" name="active">
+            <option value="">All Stutis</option>
+            <option @(ViewBag.active=="True" ?"Selected":"") value="true">Active</option> <!--بنستدعي ال ViewBag عشان يحتفظ بقيمة اللي داخل صندوق البحث-->
+            <option @(ViewBag.active=="False" ?"Selected":"") value="false">Inactive</option>
+        </select>
+    </div>
+    <div class="col-sm-2">
+        @Html.DropDownList("countryid", (SelectList)ViewBag.CountryList,"All Country", new { @class="form-control"}) <!--هلا بنستدعيها من السيرفر سايد هين في الكلاينت سايد ك قائمة -->>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-primary" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+        </button>
+    </div>
+</form>
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <div>
+                    #Region Delete With JS
+                    <a class="btn btn-danger" href="/AccountNew/Delete/@item.Id"><i class="glyphicon glyphicon-trash btn-xs"></i></a>
+                    <a onclick="return confirm('Are You Sure ')" class="btn btn-danger" href="/AccountNew/DeleteLink/@item.Id"><i class="glyphicon glyphicon-remove btn-xs"></i></a>
+                    <a class="btn Confirm btn-xs btn-warning" href="/AccountNew/DeleteLink/@item.Id"><i class="glyphicon glyphicon-remove "></i></a>
+                    #End_Region
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<NewsCMD.Models.ArticleCategory>
+
+
+@{
+    ViewBag.Title = "تصنيفات المقالات ";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" class="form-inline">
+            <input autofocus value="@ViewBag.q" name="q" class="form-control" type="search" placeholder="بحث عن " aria-label="Search">
+            <button class="btn btn-primary " type="submit">انطلق!</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-success pull-right"  href="/CMD/ArticleCategory/Add"><i class="fa fa-plus"></i> اضافة تصنيف </a>
+    </div>
+</div>
+<hr />
+
+@if (Model.Count() > 0)
+{
+<table class="table">
+    <tr>
+        <th>
+            تصنيف مقال
+        </th>
+        <th>
+            تاريخ الاضافة
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.InsertedAt.Value.ToShortDateString()
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                <a class="btn btn-info" href="/CMD/ArticleCategory/Edit/@item.Id"><i class="glyphicon glyphicon-adjust btn-xs"></i>تعديل</a>
+
+
+                <a class="btn Confirm btn-xs btn-warning" href="/CMD/ArticleCategory/Delete/@item.Id"><i class="glyphicon glyphicon-remove "></i></a>
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+}
+else
+{
+<div class="alert alert-info">
+
+    @Resources.Labels.NoItems
+    
+</div>
+}
+@Html.Partial("_paging2")
+
+

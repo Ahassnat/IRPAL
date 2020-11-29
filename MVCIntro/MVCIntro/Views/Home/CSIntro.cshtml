@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "C# Intro";
+
+}
+
+<h1>@ViewBag.Title</h1>
+<h3>Value Type</h3>
+@{
+    int x = 50;
+    int y = 60;
+    y += 20;
+
+}
+<p>X=<b>@x </b>   Y=<b>@y</b> </p>
+
+<hr />
+
+<h3>Ref Type </h3>
+@{
+    var bmw = new MVCIntro.Controllers.SendDataToViewController.Car();
+    bmw.Name = "BMW Series 1";
+    bmw.Model = "KGP X3";
+
+    //بنستدعي هان البيانات من اللي فوق بنفس الاسم فيكون الاسم بي ام دبيلو
+    //عشان توخد كل وحدة بياناتها لحال بنروح بنغير الكلاس من جوا الكنترولر ل
+    //struct--
+    // بدل كلاس
+    //MVCIntro.Controllers.SendDataToViewController.Car KIA = bmw;
+    //KIA.Name = "kia ";
+
+    //هاد نوع الداتا تايب تاعت الكلاس لكن بنستغني عنها باستدعاء
+    //Var
+    // MVCIntro.Controllers.SendDataToViewController.Car kia = new MVCIntro.Controllers.SendDataToViewController.Car();
+    //kia.Name = "serias KIA 20";
+
+    var audie = new MVCIntro.Controllers.SendDataToViewController.Car();
+    audie.Name = "Audie P+";
+    audie.Year = 1989;
+
+}
+<p>bmw Name <b>@bmw.Name</b></p>
+@*<p>KIA Name <b>@kia.Name</b></p>*@
+<br />
+<p>Audie Model :: :  <b>@audie.Name </b></p>
+<p>Audie Year :::  <b>@audie.Year</b></p>
+
+<hr />
+<h3>Array</h3>
+@{
+    string[] colors = new string[] { "red", "blue", "yaloo", "solo" };
+    for (int i = 0; i < colors.Length; i++)
+    {
+        <ul>
+            <li>@colors[i]</li>
+        </ul>
+    }
+    <hr />
+
+    foreach (var color in colors)
+    {
+        <ol>
+            <li>
+                @color
+            </li>
+        </ol>
+    }
+
+}
+<h3>2D Array</h3>
+@{
+    int[,] matrix = new int[4, 5];
+    for (int r = 0; r < 4; r++)
+    {
+        for (int c = 0; c < 5; c++)
+        {
+            matrix[r, c] = r + c * 10;
+            @matrix[r, c]
+            <span>&nbsp;&nbsp;&nbsp;</span>
+        }
+        <br />
+    }
+    <h3>Array of Array</h3>
+    @*int[][] matrix2 = new int[4][];
+    for (int g = 0; g < matrix2.Length; g++)
+    {
+        matrix2[g] = new int[5];
+    }
+    for (int h = 0; h < matrix2.Length; h++)
+    {
+        for (int z = 0; z < matrix2[h].Length; z++)
+        {
+
+            matrix2[h][z] = h+z + 3;
+            @matrix2[h][z];
+            <span>&nbsp;</span>
+        }
+        <br />
+    }*@
+}

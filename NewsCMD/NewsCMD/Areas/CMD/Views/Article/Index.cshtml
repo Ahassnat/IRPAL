@@ -1,0 +1,91 @@
+﻿@model IEnumerable<NewsCMD.Models.Article>
+
+@{
+    /**/
+
+    ViewBag.Title = "المقالات";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" class="form-inline">
+            <input autofocus value="@ViewBag.q" name="q" class="form-control" type="search" placeholder="بحث عن " aria-label="Search">
+            <button class="btn btn-primary " type="submit">انطلق!</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-success pull-right" href="/CMD/Article/Add"><i class="fa fa-plus"></i> اضافة مقال </a>
+    </div>
+</div>
+<hr />
+
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                عنوان المقال
+            </th>
+            <th>
+                التصنيف
+            </th>
+            <th>
+                النشر
+            </th>
+            <th>
+                عنوان الرابط
+            </th>
+            <th>
+                تاريخ الاضافة
+            </th>
+   
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleCategory.Title)
+            </td>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.Published)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+
+            <td>
+                @item.InsertedAt.Value.ToShortDateString()
+            </td>
+
+            <td>
+                <a class="btn btn-info btn-xs" href="/CMD/Article/Edit/@item.Id"><i class="glyphicon glyphicon-edit "></i></a>
+
+
+                <a class="btn Confirm btn-xs btn-warning" href="/CMD/Article/Delete/@item.Id"><i class="glyphicon glyphicon-remove "></i></a>
+
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+            </td>
+        </tr>
+        }
+
+    </table>
+
+
+}
+else
+{
+    <div class="alert alert-info">
+
+        @Resources.Labels.NoItems
+
+    </div>
+}
+@Html.Partial("_paging2")

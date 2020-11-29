@@ -1,0 +1,74 @@
+﻿@{ 
+    //المعلومة اللي اسمها لانج بالرابط الحالي
+    var lang = ViewContext.RouteData.Values["lang"].ToString().ToLower();
+    //اللغة اللي بنفكر نروح عليها 
+    var toLang = (lang == "en" ? "ar" : "en");
+    //الرابط الجديد
+    var toUrl = Request.Url.ToString().Replace("/" + lang + "/", "/" + toLang + "/");
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -  @Resources.Labels.MainTitle</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    @if (lang == "ar")
+    {
+        <link href="/Content/bootstrap-rtl/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Amiri|Cairo" rel="stylesheet">
+        <style>
+            body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+                font-family: 'Cairo', sans-serif;
+                font-family: 'Amiri', serif;
+            }
+        </style>
+    }
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="/@lang/Home/Index">@Resources.Labels.AppName</a>*@
+                @Html.ActionLink(Resources.Labels.AppName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(Resources.Labels.Home, "Index", "Home")</li>
+                    <li>@Html.ActionLink(Resources.Labels.About, "About", "Home")</li>
+                    <li>@Html.ActionLink(Resources.Labels.Contact, "Contact", "Home")</li>
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-@(lang=="ar"?"left":"right")">
+                    <li>
+                        <a href="@toUrl">@(toLang=="ar"?"عربي":"English")</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - @Resources.Labels.MainTitle</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

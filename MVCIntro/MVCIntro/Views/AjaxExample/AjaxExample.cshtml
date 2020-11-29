@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Ajax Example";
+}
+
+<button id="btn1" class="btn btn-default">
+    post # 1
+</button>
+
+<button id="btn2" class="btn btn-primary">
+    post XML <span></span>
+</button>
+
+<button id="btn3" class="btn btn-danger">
+    post JSON <span></span>
+</button>
+
+<button id="btn4" class="btn btn-default">
+    Get # 1
+</button>
+<span class="wait"></span>
+<hr />
+<div id="divLoad" class="jumbotron">
+
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#btn1").click(function () {
+                $.ajax({
+                    url: "/AjaxExample/PostEx",
+                    data: {age:5,gender:"female"},
+                    type: "Post",
+                    success: function (data) {
+                        $("#divLoad").html(data)
+                    }
+
+                });
+            });
+
+
+            $("#btn2").click(function () {
+                $.ajax({
+                    url: "/AjaxExample/GetXML",
+                    type: "POST",
+                    dataType:"XML",
+                    success: function (xml) {
+                        $("#divLoad").html("");
+                        $(xml).find("person").each(function () {
+                            $("#divLoad").append("Name: <b>" +
+                                $(this).find("name").text() + "</b>");
+                            $("#divLoad").append("<br>Age: <b>" +
+                                $(this).find("age").text() + "</b>");
+                            $("#divLoad").append("<br>Edu: <b>" +
+                                $(this).find("edu").text() + "</b><hr>");
+                        });
+                    }
+                });
+            });
+
+
+
+            $("#btn3").click(function () {
+                $.ajax({
+                    url: "/AjaxExample/GetJson",
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function (json) {
+                        $("#divLoad").html("");
+                        $(json).each(function () {
+                            $("#divLoad").append("</br>Name: <b>" +
+                                this.Name + "</br>");
+                            $("#divLoad").append("</br>Age: <b>" +
+                                this.Age + "</br>");
+                            $("#divLoad").append("</br>Edu: <b>" +
+                                this.Edu + "</br><hr>");
+                        });
+                    }
+                });
+            });
+
+
+
+            $("#btn4").click(function () {
+                $.ajax({
+                    url: "/AjaxExample/GetEx",
+                    data: { age: 5, gender: "female" },
+                    type: "get",
+                    success: function (data) {
+                        $("#divLoad").html(data)
+                    }
+
+                });
+            });
+
+
+            $(document).ajaxStart(function () {
+                $(".wait").text("wait...")
+            });
+            $(document).ajaxStop(function () {
+                $(".wait").text("")
+            });
+            $(document).ajaxError(function () {
+                $(".wait").text("")
+            });
+
+
+        });
+    </script>
+ }

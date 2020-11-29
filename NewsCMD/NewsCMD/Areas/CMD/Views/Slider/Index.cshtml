@@ -1,0 +1,82 @@
+﻿@model IEnumerable<NewsCMD.Models.Slider>
+
+@{
+    ViewBag.Title = "عرض جميع الشرائح";
+}
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" class="form-inline">
+            <input autofocus value="@ViewBag.q" name="q" class="form-control" type="search" placeholder="بحث عن " aria-label="Search">
+            <button class="btn btn-primary " type="submit">انطلق!</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-success pull-right" href="/CMD/Slider/Add"><i class="fa fa-plus"></i> اضافة شريحة جديدة </a>
+    </div>
+</div>
+<hr />
+@if (Model.Count() > 0)
+{
+<table class="table">
+    <tr>
+        <th>
+            عنوان الشريحة
+        </th>
+        <th>
+            الصورة
+        </th>
+        <th>
+            الرابط
+        </th>
+        <th>
+            فعال
+        </th>
+        <th>
+            نافذة جديدة
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Image)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.URL)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Active)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NewWindow)
+    </td>
+
+    <td>
+        <a class="btn btn-info btn-sm" href="/CMD/Slider/Edit/@item.Id"><i class="glyphicon glyphicon-edit"></i></a>
+        <a class="btn Confirm btn-danger btn-sm" href="/CMD/Slider/Delete/@item.Id"><i class="glyphicon glyphicon-remove"></i></a>
+
+    </td>
+</tr>
+}
+
+</table>
+}
+else
+{
+<div class="alert alert-info">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        @Resources.Labels.NoItems
+</div>
+   
+}
+
+@Html.Partial("_paging2")

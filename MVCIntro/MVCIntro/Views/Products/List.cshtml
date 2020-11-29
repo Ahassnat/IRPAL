@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    // لو بدي استخدم الصفحة من غير *اللياوت * ب
+    //Layout = null;
+}
+
+<h2>List</h2>
+<p> List Of Products </p>
+
+@* للاستخدام السكربت والسي اس اس المعلن عنها في ملف *اللياوت* بدالة ريندر  *@
+@section scripts{
+    <script>
+        alert("Welcome to tour wish list")
+    </script>
+}
+@section css{
+    <style>
+        p {
+            color: aqua;
+            background: bottom;
+        }
+    </style>
+}

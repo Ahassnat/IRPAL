@@ -1,0 +1,82 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Get Example";
+}
+
+<pre>jQuery.get( url [, data ] [, success ] [, dataType ] )
+url
+Type: String
+A string containing the URL to which the request is sent.
+data
+Type: PlainObject or String
+A plain object or string that is sent to the server with the request.
+success
+Type: Function( PlainObject data, String textStatus, jqXHR jqXHR )
+A callback function that is executed if the request succeeds. Required if dataType is provided, but you can use null or jQuery.noop as a placeholder.
+dataType
+Type: String
+The type of data expected from the server. Default: Intelligent Guess (xml, json, script, text, html).</pre>
+
+<button id="btn1" class="btn btn-default">
+    Get # 1
+</button>
+
+<button id="btn2" class="btn btn-primary">
+    Get XML <span></span>
+</button>
+
+<button id="btn3" class="btn btn-danger">
+    Get JSON <span></span>
+</button>
+<hr />
+<div id="divLoad" class="jumbotron">
+
+</div>
+
+@section scripts{
+    <script>
+       
+        $(function () {
+            $("#btn1").click(function () {
+                $.get("/AjaxExample/GetEx",
+                    { age: 55, gender: "Female" },
+                    function (data) {
+                        $("#divLoad").html(data);
+                    });
+            });
+
+            $("#btn2").click(function () {
+                $("#btn2 span").text("Loading...");
+                $.get("/AjaxExample/GetXML",
+                    function (xml) {
+                        $("#divLoad").html("");
+                        $(xml).find("person").each(function () {
+                            $("#divLoad").append("Name: <b>" +
+                                $(this).find("name").text() + "</b>");
+                            $("#divLoad").append("<br>Age: <b>" +
+                                $(this).find("age").text() + "</b>");
+                            $("#divLoad").append("<br>Edu: <b>" +
+                                $(this).find("edu").text() + "</b><hr>");
+                        });
+                        $("#btn2 span").text("");
+                    }, "XML");
+            });
+
+            $("#btn3").click(function () {
+                $.get("/AjaxExample/GetJson",
+                    function (json) {
+                        $("#divLoad").html("");
+                        $(json).each(function () {
+                            $("#divLoad").append("</br>Name: <b>" +
+                                this.Name + "</br>");
+                            $("#divLoad").append("</br>Age: <b>" +
+                                this.Age + "</br>");
+                            $("#divLoad").append("</br>Edu: <b>" +
+                                this.Edu + "</br><hr>");
+                        });
+                    });
+            });
+        });
+    </script>
+}
