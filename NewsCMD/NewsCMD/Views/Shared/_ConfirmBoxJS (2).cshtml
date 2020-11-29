@@ -1,0 +1,52 @@
+﻿@if (TempData["msg"] != null)
+{
+    var msg = TempData["msg"].ToString();
+    var msgClass = "alert alert-info";
+    if (msg.StartsWith("s:"))
+    {
+        msg = msg.Substring(2);
+        msgClass = "alert alert-success";
+    }
+    else if (msg.StartsWith("e:"))
+    {
+        msg=msg.Substring(2);
+        msgClass = "alert alert-warning";
+    }
+    else if (msg.StartsWith("d:"))
+    {
+        msg = msg.Substring(2);
+        msgClass = "alert alert-danger";
+    }
+    <div class="@msgClass">
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        @msg
+
+    </div>
+}
+
+
+
+
+
+
+
+@*
+
+    @if (TempData["msg"] != null)
+    {
+    <div class="alert alert-info">
+        @*هاد البوتون بس بيطلع علامة الاغلاق جو
+            Alert
+            وجبناه من البوت ستراب *@  @*
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    @TempData["msg"]
+    </div>
+    }
+            *@

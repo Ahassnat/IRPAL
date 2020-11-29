@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FBaselNewsWebSiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="InsertedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="InsertedAdminId" Type="Int32" />
+    <Property Name="UpdatedAdminId" Type="Int32" />
+    <NavigationProperty Name="Articles" Relationship="Self.FK_Article_Admin" FromRole="Admin" ToRole="Article" />
+    <NavigationProperty Name="Articles1" Relationship="Self.FK_Article_Admin1" FromRole="Admin" ToRole="Article" />
+    <NavigationProperty Name="ArticleCategories" Relationship="Self.FK_ArticleCategory_Admin" FromRole="Admin" ToRole="ArticleCategory" />
+    <NavigationProperty Name="ArticleCategories1" Relationship="Self.FK_ArticleCategory_Admin1" FromRole="Admin" ToRole="ArticleCategory" />
+    <NavigationProperty Name="Sliders" Relationship="Self.FK_Slider_Admin" FromRole="Admin" ToRole="Slider" />
+    <NavigationProperty Name="Sliders1" Relationship="Self.FK_Slider_Admin1" FromRole="Admin" ToRole="Slider" />
+    <NavigationProperty Name="StaticPages" Relationship="Self.FK_StaticPage_Admin" FromRole="Admin" ToRole="StaticPage" />
+    <NavigationProperty Name="StaticPages1" Relationship="Self.FK_StaticPage_Admin1" FromRole="Admin" ToRole="StaticPage" />
+    <NavigationProperty Name="Links" Relationship="Self.AdminLink" FromRole="Admin" ToRole="Link" />
+    <NavigationProperty Name="Menus" Relationship="FBaselNewsWebSiteModel.FK_Menu_Admin" FromRole="Admin" ToRole="Menu" />
+    <NavigationProperty Name="Menus1" Relationship="FBaselNewsWebSiteModel.FK_Menu_Admin1" FromRole="Admin" ToRole="Menu" />
+  </EntityType>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Slug" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Summary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Published" Type="Boolean" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="InsertedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="InsertedAdminId" Type="Int32" />
+    <Property Name="UpdatedAdminId" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_Article_Admin" FromRole="Article" ToRole="Admin" />
+    <NavigationProperty Name="Admin1" Relationship="Self.FK_Article_Admin1" FromRole="Article" ToRole="Admin" />
+    <NavigationProperty Name="ArticleCategory" Relationship="Self.FK_Article_ArticleCategory" FromRole="Article" ToRole="ArticleCategory" />
+  </EntityType>
+  <EntityType Name="ArticleCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="InsertedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="InsertedAdminId" Type="Int32" />
+    <Property Name="UpdatedAdminId" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_ArticleCategory_Admin" FromRole="ArticleCategory" ToRole="Admin" />
+    <NavigationProperty Name="Admin1" Relationship="Self.FK_ArticleCategory_Admin1" FromRole="ArticleCategory" ToRole="Admin" />
+    <NavigationProperty Name="Articles" Relationship="Self.FK_Article_ArticleCategory" FromRole="ArticleCategory" ToRole="Article" />
+  </EntityType>
+  <EntityType Name="Link">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="ShowInMenu" Type="Boolean" />
+    <Property Name="OrderId" Type="Int32" />
+    <NavigationProperty Name="Admins" Relationship="Self.AdminLink" FromRole="Link" ToRole="Admin" />
+  </EntityType>
+  <EntityType Name="Slider">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="NewWindow" Type="Boolean" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="InsertedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="InsertedAdminId" Type="Int32" />
+    <Property Name="UpdatedAdminId" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_Slider_Admin" FromRole="Slider" ToRole="Admin" />
+    <NavigationProperty Name="Admin1" Relationship="Self.FK_Slider_Admin1" FromRole="Slider" ToRole="Admin" />
+  </EntityType>
+  <EntityType Name="StaticPage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Slug" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Published" Type="Boolean" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="InsertedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="InsertedAdminId" Type="Int32" />
+    <Property Name="UpdatedAdminId" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_StaticPage_Admin" FromRole="StaticPage" ToRole="Admin" />
+    <NavigationProperty Name="Admin1" Relationship="Self.FK_StaticPage_Admin1" FromRole="StaticPage" ToRole="Admin" />
+  </EntityType>
+  <Association Name="FK_Article_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="InsertedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Article_Admin1">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="UpdatedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleCategory_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="ArticleCategory" Type="Self.ArticleCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleCategory">
+        <PropertyRef Name="InsertedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleCategory_Admin1">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="ArticleCategory" Type="Self.ArticleCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleCategory">
+        <PropertyRef Name="UpdatedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Slider_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Slider" Type="Self.Slider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Slider">
+        <PropertyRef Name="InsertedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Slider_Admin1">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Slider" Type="Self.Slider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Slider">
+        <PropertyRef Name="UpdatedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaticPage_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="StaticPage" Type="Self.StaticPage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaticPage">
+        <PropertyRef Name="InsertedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaticPage_Admin1">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="StaticPage" Type="Self.StaticPage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaticPage">
+        <PropertyRef Name="UpdatedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Article_ArticleCategory">
+    <End Role="ArticleCategory" Type="Self.ArticleCategory" Multiplicity="0..1" />
+    <End Role="Article" Type="Self.Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdminLink">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <End Role="Link" Type="Self.Link" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="FBaselNewsWebSiteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Articles" EntityType="Self.Article" />
+    <EntitySet Name="ArticleCategories" EntityType="Self.ArticleCategory" />
+    <EntitySet Name="Links" EntityType="Self.Link" />
+    <EntitySet Name="Sliders" EntityType="Self.Slider" />
+    <EntitySet Name="StaticPages" EntityType="Self.StaticPage" />
+    <AssociationSet Name="FK_Article_Admin" Association="Self.FK_Article_Admin">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Article_Admin1" Association="Self.FK_Article_Admin1">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleCategory_Admin" Association="Self.FK_ArticleCategory_Admin">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="ArticleCategory" EntitySet="ArticleCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleCategory_Admin1" Association="Self.FK_ArticleCategory_Admin1">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="ArticleCategory" EntitySet="ArticleCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Slider_Admin" Association="Self.FK_Slider_Admin">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Slider" EntitySet="Sliders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Slider_Admin1" Association="Self.FK_Slider_Admin1">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Slider" EntitySet="Sliders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaticPage_Admin" Association="Self.FK_StaticPage_Admin">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="StaticPage" EntitySet="StaticPages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaticPage_Admin1" Association="Self.FK_StaticPage_Admin1">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="StaticPage" EntitySet="StaticPages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Article_ArticleCategory" Association="Self.FK_Article_ArticleCategory">
+      <End Role="ArticleCategory" EntitySet="ArticleCategories" />
+      <End Role="Article" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="AdminLink" Association="Self.AdminLink">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Link" EntitySet="Links" />
+    </AssociationSet>
+    <EntitySet Name="Menus" EntityType="FBaselNewsWebSiteModel.Menu" />
+    <AssociationSet Name="FK_Menu_Admin" Association="FBaselNewsWebSiteModel.FK_Menu_Admin">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Menu" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_Admin1" Association="FBaselNewsWebSiteModel.FK_Menu_Admin1">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Menu" EntitySet="Menus" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="NewWindow" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="InsertedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="InsertedAdminId" Type="Int32" />
+    <Property Name="UpdatedAdminId" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="FBaselNewsWebSiteModel.FK_Menu_Admin" FromRole="Menu" ToRole="Admin" />
+    <NavigationProperty Name="Admin1" Relationship="FBaselNewsWebSiteModel.FK_Menu_Admin1" FromRole="Menu" ToRole="Admin" />
+  </EntityType>
+  <Association Name="FK_Menu_Admin">
+    <End Type="FBaselNewsWebSiteModel.Admin" Role="Admin" Multiplicity="0..1" />
+    <End Type="FBaselNewsWebSiteModel.Menu" Role="Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="InsertedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_Admin1">
+    <End Type="FBaselNewsWebSiteModel.Admin" Role="Admin" Multiplicity="0..1" />
+    <End Type="FBaselNewsWebSiteModel.Menu" Role="Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="UpdatedAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

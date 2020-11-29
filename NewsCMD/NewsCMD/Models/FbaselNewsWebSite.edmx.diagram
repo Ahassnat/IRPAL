@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f3bdafba619e46fdbd17b9104943384a" Name="Diagram1">
+        <EntityTypeShape EntityType="FBaselNewsWebSiteModel.Admin" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FBaselNewsWebSiteModel.Article" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FBaselNewsWebSiteModel.ArticleCategory" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FBaselNewsWebSiteModel.Link" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="FBaselNewsWebSiteModel.Slider" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FBaselNewsWebSiteModel.StaticPage" Width="1.5" PointX="3" PointY="24.875" IsExpanded="true" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_Article_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_Article_Admin1" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_ArticleCategory_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_ArticleCategory_Admin1" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_Slider_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_Slider_Admin1" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_StaticPage_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_StaticPage_Admin1" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_Article_ArticleCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.AdminLink" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FBaselNewsWebSiteModel.Menu" Width="1.5" PointX="3" PointY="4.25" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_Menu_Admin" />
+        <AssociationConnector Association="FBaselNewsWebSiteModel.FK_Menu_Admin1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

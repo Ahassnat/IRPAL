@@ -1,0 +1,62 @@
+﻿
+@{
+    /*Smart Paging*/
+
+    int PageId = (int)ViewBag.PageId;
+    int PageCount = (int)ViewBag.PageCount;
+    string BaseURL = ViewBag.BaseURL;
+    var sparator = "/";
+    if (BaseURL.Contains("?"))
+    {
+        sparator = "&pageid=";
+    }
+    if (PageCount > 1)
+    {
+        int MaxPageCount = 5;
+        int Min = 1;
+        int Max = MaxPageCount * 2;
+        if (PageId > MaxPageCount)
+        {
+            Min = PageId - MaxPageCount;
+            Max = PageId + MaxPageCount;
+        }
+        if (Max > PageCount)
+        {
+            Max = PageCount;
+        }
+                    <ul class="pagination pagination-sm">
+                        @if (PageId > 1)
+            {
+                            <li><a href="@BaseURL@(sparator)1"><i class="glyphicon glyphicon-chevron-right"></i><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+                            <li><a href="@BaseURL@(sparator)@(PageId-1)"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+                        }
+                        else
+                        {
+                            <li class="disabled"><span><i class="glyphicon glyphicon-chevron-right"></i><i class="glyphicon glyphicon-chevron-right"></i></span></li>
+                            <li class="disabled"><span><i class="glyphicon glyphicon-chevron-right"></i></span></li>
+                        }
+    @for (int i = Min; i <= Max; i++)
+                        {
+                            if (i == PageId)
+                            {
+                                <li class="active"><span>@i</span></li>
+                            }
+                            else
+                            {
+                                <li><a href="@BaseURL@(sparator)@i">@i</a></li>
+                            }
+                        }
+                        @if (PageId < PageCount)
+    {
+                            <li><a href="@BaseURL@(sparator)@(PageId+1)"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+                            <li><a href="@BaseURL@(sparator)@(PageCount)"><i class="glyphicon glyphicon-chevron-left"></i><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+                        }
+                        else
+                        {
+                            <li class="disabled"><span><i class="glyphicon glyphicon-chevron-left"></i></span></li>
+                            <li class="disabled"><span><i class="glyphicon glyphicon-chevron-left"></i><i class="glyphicon glyphicon-chevron-left"></i></span></li>
+                        }
+                    </ul>
+                }
+}
+
